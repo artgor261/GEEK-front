@@ -18,7 +18,7 @@ const fetchOptions = {
  */
 export async function register(email, password, confirmPassword) {
   const response = await fetch(
-    `${process.env.REACT_APP_API_URL}/api/register`,
+    `${process.env.REACT_APP_API_URL}/register`,
     {
       ...fetchOptions,
       method: "POST",
@@ -46,7 +46,7 @@ export async function register(email, password, confirmPassword) {
  * @returns {Promise} - Данные пользователя
  */
 export async function login(email, password) {
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
     ...fetchOptions,
     method: "POST",
     body: JSON.stringify({ email, password }),
@@ -295,3 +295,4 @@ export async function getAttemptResults(attemptId) {
 
   return data;
 }
+
