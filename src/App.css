@@ -1,0 +1,124 @@
+/* Основные стили приложения */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+  color: white;
+}
+
+/* Страница с тёмно-синим фоном */
+.page {
+  min-height: 100vh;
+  background-color: #151a36;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Центрированный контейнер */
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* Форма */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* Поле ввода */
+.input-field {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid #3d4f5d;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+}
+
+.input-field::placeholder {
+  color: #7a8a99;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #1ca3d4;
+}
+
+/* Кнопка */
+.button {
+  width: 100%;
+  padding: 15px;
+  background-color: #1ca3d4;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #1890bb;
+}
+
+.button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* Текст под формой */
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #9ca3af;
+}
+
+.form-footer a {
+  color: #1ca3d4;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Сообщение об ошибке */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Загрузка */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a2332;
+  color: white;
+  font-size: 20px;
+}
