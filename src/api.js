@@ -50,6 +50,7 @@ export async function login(email, password) {
     ...fetchOptions,
     method: "POST",
     body: JSON.stringify({ email, password }),
+    credentials: "include",
   });
 
   const data = await response.json();
@@ -295,5 +296,6 @@ export async function getAttemptResults(attemptId) {
 
   return data;
 }
+
 
 
