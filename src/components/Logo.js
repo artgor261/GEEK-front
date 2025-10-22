@@ -21,7 +21,7 @@ const styles = {
   image: {
     width: "120px", // можно изменить
     height: "auto", // сохраняет пропорции
-    marginTop: "-20px",
+    marginTop: "-5px",
   },
 };
 
