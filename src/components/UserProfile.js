@@ -10,7 +10,7 @@ function UserProfile({ user }) {
       </div>
       {/* Иконка пользователя */}
       <div style={styles.icon}>
-        <svg width="25" height="25" viewBox="0 0 40 40" fill="none">
+        <svg width="25" height="30" viewBox="0 0 40 35" fill="none">
           <circle cx="20" cy="20" r="19" stroke="white" strokeWidth="2" />
           <circle cx="20" cy="15" r="6" stroke="white" strokeWidth="2" />
           <path
@@ -29,17 +29,17 @@ const styles = {
     position: "absolute",
     right: 5,
     display: "flex",
-    gap: "15px",
+    gap: "10px",
   },
   info: {
     textAlign: "right",
   },
   name: {
-    fontSize: "12px",
+    fontSize: "17px",
     fontWeight: "500",
   },
   subtitle: {
-    fontSize: "8px",
+    fontSize: "12px",
     color: "#9ca3af",
   },
   icon: {
