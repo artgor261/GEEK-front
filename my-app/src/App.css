@@ -27,12 +27,22 @@ body {
   justify-content: center;
   align-items: center;
   flex: 1;
+  width: 514;
+  height: 496;
+  top: 310px;
+  left: 607px;
 }
 
 /* Форма */
 .form-container {
-  width: 100%;
+  /* width: 100%;
   max-width: 400px;
+  height: 200px; */
+  width: 514px;
+  height: 496px;
+  opacity: 1;
+  top: 310px;
+  left: 607px;
 }
 
 .form-title {
@@ -47,11 +57,13 @@ body {
   width: 100%;
   padding: 15px;
   margin-bottom: 15px;
-  background-color: transparent;
-  border: 1px solid #3d4f5d;
-  border-radius: 8px;
   color: white;
-  font-size: 16px;
+  height: 40px;
+  border-radius: 10px;
+  border-width: 1px;
+  border: 1px solid #d9fffa;
+  font-size: 14px;
+  background-color: transparent;
 }
 
 .input-field::placeholder {
@@ -76,10 +88,6 @@ body {
   cursor: pointer;
   margin-top: 10px;
 }
-
-/* .button:hover {
-  background-color: #10181c;
-} */
 
 .button:disabled {
   background-color: #555;
