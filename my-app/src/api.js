@@ -1,5 +1,5 @@
 // Базовый URL API
-const API_BASE = "http://localhost:8080";
+// const API_BASE = "http://localhost:8080/api";
 
 // Настройки для всех запросов (отправка cookies)
 const fetchOptions = {
@@ -17,15 +17,19 @@ const fetchOptions = {
  * @returns {Promise} - Данные пользователя
  */
 export async function register(email, password, confirmPassword) {
-  const response = await fetch(`${API_BASE}/api/register`, {
-    ...fetchOptions,
-    method: "POST",
-    body: JSON.stringify({
-      email,
-      password,
-      confirm_password: confirmPassword,
-    }),
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/register`,
+    {
+      ...fetchOptions,
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password,
+        confirm_password: confirmPassword,
+        credentials: "include",
+      }),
+    }
+  );
 
   const data = await response.json();
 
@@ -43,10 +47,11 @@ export async function register(email, password, confirmPassword) {
  * @returns {Promise} - Данные пользователя
  */
 export async function login(email, password) {
-  const response = await fetch(`${API_BASE}/api/login`, {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
     ...fetchOptions,
     method: "POST",
     body: JSON.stringify({ email, password }),
+    credentials: "include",
   });
 
   const data = await response.json();
@@ -62,9 +67,10 @@ export async function login(email, password) {
  * Выход из системы
  */
 export async function logout() {
-  await fetch(`${API_BASE}/api/logout`, {
+  await fetch(`${process.env.REACT_APP_API_URL}/api/logout`, {
     ...fetchOptions,
     method: "POST",
+    credentials: "include",
   });
 }
 
@@ -73,9 +79,10 @@ export async function logout() {
  * @returns {Promise} - Статус авторизации и данные пользователя
  */
 export async function checkSession() {
-  const response = await fetch(`${API_BASE}/api/session`, {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/session`, {
     ...fetchOptions,
     method: "GET",
+    credentials: "include",
   });
 
   return response.json();
@@ -87,10 +94,14 @@ export async function checkSession() {
  * @returns {Promise} - Данные теста
  */
 export async function getTestById(testId) {
-  const response = await fetch(`${API_BASE}/api/test/${testId}`, {
-    ...fetchOptions,
-    method: "GET",
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/test/${testId}`,
+    {
+      ...fetchOptions,
+      method: "GET",
+      credentials: "include",
+    }
+  );
 
   const data = await response.json();
 
@@ -108,10 +119,14 @@ export async function getTestById(testId) {
  * @returns {Promise} - Данные попытки тестирования
  */
 export async function startAttempt(testId) {
-  const response = await fetch(`${API_BASE}/api/tests/${testId}/attempt`, {
-    ...fetchOptions,
-    method: "POST",
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/tests/${testId}/attempt`,
+    {
+      ...fetchOptions,
+      method: "POST",
+      credentials: "include",
+    }
+  );
 
   const data = await response.json();
 
@@ -130,10 +145,11 @@ export async function startAttempt(testId) {
  */
 export async function getAttemptQuestions(attemptId) {
   const response = await fetch(
-    `${API_BASE}/api/attempt/${attemptId}/question`,
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/question`,
     {
       ...fetchOptions,
       method: "GET",
+      credentials: "include",
     }
   );
 
@@ -157,11 +173,12 @@ export async function getAttemptQuestions(attemptId) {
  */
 export async function postAnswer(attemptId, questionPosition, text) {
   const response = await fetch(
-    `${API_BASE}/api/attempt/${attemptId}/question/${questionPosition}/submit`,
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/question/${questionPosition}/submit`,
     {
       ...fetchOptions,
       method: "POST",
       body: JSON.stringify({ text }),
+      credentials: "include",
     }
   );
 
@@ -181,10 +198,14 @@ export async function postAnswer(attemptId, questionPosition, text) {
  * @returns {Promise} - Результаты тестирования
  */
 export async function submitAttempt(attemptId) {
-  const response = await fetch(`${API_BASE}/api/attempt/${attemptId}/submit`, {
-    ...fetchOptions,
-    method: "POST",
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/submit`,
+    {
+      ...fetchOptions,
+      method: "POST",
+      credentials: "include",
+    }
+  );
 
   const data = await response.json();
 
@@ -203,10 +224,11 @@ export async function submitAttempt(attemptId) {
  */
 export async function createAIDialogue(attemptId, questionPosition) {
   const response = await fetch(
-    `${API_BASE}/api/attempt/${attemptId}/question/${questionPosition}/ai/start`,
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/question/${questionPosition}/ai/start`,
     {
       ...fetchOptions,
       method: "POST",
+      credentials: "include",
     }
   );
 
@@ -235,11 +257,12 @@ export async function sendAIMessage(
   message
 ) {
   const response = await fetch(
-    `${API_BASE}/api/attempt/${attemptId}/question/${questionPosition}/ai/${threadId}/send`,
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/question/${questionPosition}/ai/${threadId}/send`,
     {
       ...fetchOptions,
       method: "POST",
       body: JSON.stringify({ message }),
+      credentials: "include",
     }
   );
 
@@ -267,10 +290,14 @@ export async function sendAIMessage(
  *     - created_at: время создания ответа
  */
 export async function getAttemptResults(attemptId) {
-  const response = await fetch(`${API_BASE}/api/attempt/${attemptId}/result`, {
-    ...fetchOptions,
-    method: "GET",
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/attempt/${attemptId}/result`,
+    {
+      ...fetchOptions,
+      method: "GET",
+      credentials: "include",
+    }
+  );
 
   const data = await response.json();
 
