@@ -132,7 +132,6 @@ const styles = {
     fontSize: "48px",
     marginBottom: "30px",
     fontWeight: "500",
-    style: "Semi Bold",
   },
   scoreValue: {
     fontSize: "80px",
