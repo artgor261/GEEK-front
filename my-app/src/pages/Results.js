@@ -130,17 +130,18 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "0",
-    minHeight: "100vh",
+    height: "100vh",
+    overflow: "hidden",
   },
   logoContainer: {
-    marginTop: "47px",
-    marginBottom: "20px",
+    marginTop: "30px",
+    marginBottom: "15px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   logoImage: {
-    maxWidth: "296px",
+    maxWidth: "200px",
     height: "auto",
   },
   container: {
@@ -151,7 +152,8 @@ const styles = {
     maxWidth: "1400px",
     width: "100%",
     padding: "0 50px",
-    marginTop: "40px",
+    marginTop: "20px",
+    flex: 1,
   },
   scoreSection: {
     display: "flex",
@@ -163,9 +165,8 @@ const styles = {
     fontSize: "48px",
     fontWeight: "600",
     color: "#D9FFFA",
-    marginBottom: "40px",
     textAlign: "center",
-    margin: "0 0 50px 0",
+    margin: "0 0 30px 0",
   },
   scoreDisplay: {
     display: "flex",
@@ -201,7 +202,7 @@ const styles = {
     position: "relative",
   },
   resultsHeader: {
-    marginBottom: "30px",
+    marginBottom: "20px",
   },
   resultsTitle: {
     fontSize: "48px",
@@ -212,8 +213,8 @@ const styles = {
   tasksList: {
     display: "flex",
     flexDirection: "column",
-    gap: "18px",
-    maxHeight: "520px",
+    gap: "15px",
+    maxHeight: "450px",
     overflowY: "auto",
     paddingRight: "15px",
     scrollbarWidth: "thin",
@@ -242,8 +243,8 @@ const styles = {
   scrollbarContainer: {
     position: "absolute",
     right: "0",
-    top: "80px",
-    height: "471px",
+    top: "75px",
+    height: "450px",
     width: "1px",
   },
   scrollbarTrack: {
@@ -264,7 +265,7 @@ const styles = {
   },
   backButton: {
     maxWidth: "300px",
-    margin: "50px auto 30px auto",
+    margin: "20px auto 20px auto",
     display: "block",
   },
 };
