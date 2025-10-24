@@ -136,7 +136,7 @@ const styles = {
     overflow: "hidden",
   },
   logoContainer: {
-    marginTop: "30px",
+    marginTop: "-18px",
     marginBottom: "15px",
     display: "flex",
     justifyContent: "center",
@@ -225,6 +225,7 @@ const styles = {
     minWidth: "514px",
     maxWidth: "514px",
     position: "relative",
+    marginTop: "-50px",
   },
   resultsHeader: {
     marginBottom: "20px",
