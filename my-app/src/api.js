@@ -26,7 +26,6 @@ export async function register(email, password, confirmPassword) {
         email,
         password,
         confirm_password: confirmPassword,
-        credentials: "include",
       }),
     }
   );
@@ -51,7 +50,6 @@ export async function login(email, password) {
     ...fetchOptions,
     method: "POST",
     body: JSON.stringify({ email, password }),
-    credentials: "include",
   });
 
   const data = await response.json();
@@ -70,7 +68,6 @@ export async function logout() {
   await fetch(`${process.env.REACT_APP_API_URL}/api/logout`, {
     ...fetchOptions,
     method: "POST",
-    credentials: "include",
   });
 }
 
@@ -82,7 +79,6 @@ export async function checkSession() {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/api/session`, {
     ...fetchOptions,
     method: "GET",
-    credentials: "include",
   });
 
   return response.json();
@@ -99,7 +95,6 @@ export async function getTestById(testId) {
     {
       ...fetchOptions,
       method: "GET",
-      credentials: "include",
     }
   );
 
@@ -124,7 +119,7 @@ export async function startAttempt(testId) {
     {
       ...fetchOptions,
       method: "POST",
-      credentials: "include",
+      body: JSON.stringify({ access_code: "TEST-2025-INFINITY" }),
     }
   );
 
@@ -149,7 +144,6 @@ export async function getAttemptQuestions(attemptId) {
     {
       ...fetchOptions,
       method: "GET",
-      credentials: "include",
     }
   );
 
@@ -178,7 +172,6 @@ export async function postAnswer(attemptId, questionPosition, text) {
       ...fetchOptions,
       method: "POST",
       body: JSON.stringify({ text }),
-      credentials: "include",
     }
   );
 
@@ -203,7 +196,6 @@ export async function submitAttempt(attemptId) {
     {
       ...fetchOptions,
       method: "POST",
-      credentials: "include",
     }
   );
 
@@ -228,7 +220,6 @@ export async function createAIDialogue(attemptId, questionPosition) {
     {
       ...fetchOptions,
       method: "POST",
-      credentials: "include",
     }
   );
 
@@ -262,7 +253,6 @@ export async function sendAIMessage(
       ...fetchOptions,
       method: "POST",
       body: JSON.stringify({ message }),
-      credentials: "include",
     }
   );
 
@@ -295,7 +285,6 @@ export async function getAttemptResults(attemptId) {
     {
       ...fetchOptions,
       method: "GET",
-      credentials: "include",
     }
   );
 
