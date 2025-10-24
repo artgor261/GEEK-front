@@ -71,11 +71,13 @@ function Results({ user }) {
       <div style={styles.container}>
         {/* Блок с оценкой (слева) */}
         <div style={styles.scoreSection}>
-          <h2 style={styles.scoreTitle}>Ваша оценка:</h2>
-          <div style={styles.scoreDisplay}>
-            <span style={styles.scoreValue}>{results.score}</span>
-            <div style={styles.scoreDivider}></div>
-            <span style={styles.scoreMax}>{maxScore}</span>
+          <div style={styles.scoreCard}>
+            <h2 style={styles.scoreTitle}>Ваша оценка:</h2>
+            <div style={styles.scoreDisplay}>
+              <span style={styles.scoreValue}>{results.score}</span>
+              <div style={styles.scoreDivider}></div>
+              <span style={styles.scoreMax}>{maxScore}</span>
+            </div>
           </div>
         </div>
 
@@ -159,40 +161,63 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    minWidth: "450px",
+  },
+  scoreCard: {
+    width: "505px",
+    height: "471px",
+    border: "1px solid #D9FFFA",
+    borderRadius: "10px",
+    backgroundColor: "#111F25",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "40px",
+    position: "relative",
   },
   scoreTitle: {
     fontSize: "48px",
     fontWeight: "600",
     color: "#D9FFFA",
     textAlign: "center",
-    margin: "0 0 30px 0",
+    margin: "0 0 60px 0",
+    position: "absolute",
+    top: "40px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    whiteSpace: "nowrap",
   },
   scoreDisplay: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "20px",
+    gap: "0",
     position: "relative",
+    marginTop: "40px",
   },
   scoreValue: {
     fontSize: "96px",
     fontWeight: "600",
     color: "#D9FFFA",
     lineHeight: "1",
+    position: "relative",
+    right: "30px",
   },
   scoreDivider: {
     width: "5px",
-    height: "180px",
+    height: "183px",
     backgroundColor: "#D9FFFA",
-    transform: "rotate(44deg)",
+    transform: "rotate(44.32deg)",
     position: "relative",
+    margin: "0 20px",
   },
   scoreMax: {
     fontSize: "96px",
     fontWeight: "600",
     color: "#D9FFFA",
     lineHeight: "1",
+    position: "relative",
+    left: "30px",
   },
   resultsSection: {
     display: "flex",
