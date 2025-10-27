@@ -383,7 +383,7 @@ const styles = {
     overflow: "hidden",
   },
   rightPanel: {
-    width: "25%",
+    width: "30%",
     display: "flex",
     flexDirection: "column",
     height: "100vh",
