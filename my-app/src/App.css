@@ -152,7 +152,7 @@ body {
 
 /* Эффект при наведении на кнопку завершения */
 button[title*="Завершить тестирование"]:hover {
-  background-color: transparent !important;
+  background-color: #d9fffa !important;
   border-color: white !important;
   transform: scale(1.02);
 }
@@ -160,4 +160,3 @@ button[title*="Завершить тестирование"]:hover {
 button[title*="Завершить тестирование"]:active {
   transform: scale(0.98);
 }
-

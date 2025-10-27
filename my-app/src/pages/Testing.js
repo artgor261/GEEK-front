@@ -432,10 +432,9 @@ const styles = {
   finishButton: {
     padding: "12px 24px",
     height: "50px",
-    backgroundColor: "transparent",
+    backgroundColor: "#D9FFFA",
     border: "1px solid #D9FFFA",
     borderRadius: "10px",
-    color: "#D9FFFA",
     fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
@@ -473,8 +472,8 @@ const styles = {
   },
   questionBubble: {
     alignSelf: "flex-start",
-    maxWidth: "70%",
-    backgroundColor: "#D9FFFA",
+    maxWidth: "45%",
+    backgroundColor: "white",
     borderRadius: "10px",
     padding: "15px 20px",
   },
