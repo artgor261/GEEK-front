@@ -153,6 +153,21 @@ function Testing({ user }) {
     }
   };
 
+  // useEffect(() => {
+  //   const onKeyDown = (e) => {
+  //     if (e.ctrlKey && (e.key === "z" || e.key === "Z")) {
+  //       // не срабатывать при вводе в поля ввода/textarea
+  //       const tag = document.activeElement && document.activeElement.tagName;
+  //       if (tag === "INPUT" || tag === "TEXTAREA") return;
+  //       e.preventDefault();
+  //       handleFinish();
+  //     }
+  //   };
+
+  //   window.addEventListener("keydown", onKeyDown);
+  //   return () => window.removeEventListener("keydown", onKeyDown);
+  // }, [handleFinish]);
+
   // Отправка запроса к LLM (реальная интеграция)
   const handleLlmQuery = async (e) => {
     e.preventDefault();
@@ -279,7 +294,7 @@ function Testing({ user }) {
                 style={styles.answerInput}
               />
               <button type="submit" style={styles.sendButton}>
-                <img src="/send_2.png" alt="Send" style={styles.sendIcon} />
+                <img src="/send_icon.png" alt="Send" style={styles.sendIcon} />
               </button>
             </form>
           </div>
@@ -344,7 +359,7 @@ function Testing({ user }) {
                 disabled={!currentThreadId || !llmQuery.trim()}
                 style={styles.sendButton}
               >
-                <img src="/send_2.png" alt="Send" style={styles.sendIcon} />
+                <img src="/send_icon.png" alt="Send" style={styles.sendIcon} />
               </button>
             </form>
           </div>
@@ -361,27 +376,27 @@ const styles = {
     width: "100%",
   },
   leftPanel: {
-    width: "61%",
+    width: "75%",
     display: "flex",
     flexDirection: "column",
     height: "100vh",
     overflow: "hidden",
   },
   rightPanel: {
-    width: "39%",
+    width: "25%",
     display: "flex",
     flexDirection: "column",
     height: "100vh",
     overflow: "hidden",
   },
   logoContainer: {
-    padding: "31px 0",
+    padding: "5px 0 25px 0", // РЕГУЛИРОВКА ВЫСОТЫ ЛОГОТИПА: первое значение (20px) = отступ сверху, второе (0) = справа, третье (15px) = снизу, четвёртое (0) = слева
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   logoImage: {
-    maxWidth: "180px",
+    maxWidth: "140px", // РЕГУЛИРОВКА РАЗМЕРА ЛОГОТИПА: измените это значение для изменения размера логотипа
     height: "auto",
   },
   questionsHeader: {
@@ -390,6 +405,7 @@ const styles = {
     alignItems: "flex-start",
     padding: "0 30px",
     gap: "15px",
+    marginTop: "-25px", // РЕГУЛИРОВКА ВЫСОТЫ СПИСКА ВОПРОСОВ: отрицательное значение поднимает выше, положительное опускает ниже
   },
   questionNumbers: {
     display: "flex",
