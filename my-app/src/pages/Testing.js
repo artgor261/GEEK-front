@@ -383,7 +383,7 @@ const styles = {
     overflow: "hidden",
   },
   rightPanel: {
-    width: "30%",
+    width: "25%",
     display: "flex",
     flexDirection: "column",
     height: "100vh",
@@ -506,6 +506,8 @@ const styles = {
     alignItems: "center",
     marginTop: "20px",
     paddingTop: "20px",
+    paddingLeft: "200px", // РЕГУЛИРОВКА ШИРИНЫ ПОЛЯ ВВОДА: увеличьте это значение, чтобы сделать поле уже, уменьшите - чтобы шире
+    paddingRight: "200px", // РЕГУЛИРОВКА ШИРИНЫ ПОЛЯ ВВОДА: должно быть равно paddingLeft для центрирования
   },
   answerInput: {
     flex: 1,
@@ -606,6 +608,8 @@ const styles = {
     alignItems: "center",
     paddingTop: "20px",
     borderTop: "1px solid #3d4f5d",
+    paddingLeft: "40px", // РЕГУЛИРОВКА ШИРИНЫ ПОЛЯ ВВОДА: увеличьте это значение, чтобы сделать поле уже, уменьшите - чтобы шире
+    paddingRight: "60px", // РЕГУЛИРОВКА ШИРИНЫ ПОЛЯ ВВОДА: должно быть равно paddingLeft для центрирования
   },
   llmInput: {
     flex: 1,
