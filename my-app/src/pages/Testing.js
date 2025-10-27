@@ -309,7 +309,7 @@ function Testing({ user }) {
                 rows={1}
               />
               <button type="submit" style={styles.sendButton}>
-                <img src="/send_icon.png" alt="Send" style={styles.sendIcon} />
+                <img src="/send_2.png" alt="Send" style={styles.sendIcon} />
               </button>
             </form>
           </div>
@@ -379,7 +379,7 @@ function Testing({ user }) {
                 disabled={!currentThreadId || !llmQuery.trim()}
                 style={styles.sendButton}
               >
-                <img src="/send_icon.png" alt="Send" style={styles.sendIcon} />
+                <img src="/send_2.png" alt="Send" style={styles.sendIcon} />
               </button>
             </form>
           </div>
