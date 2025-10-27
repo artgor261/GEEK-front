@@ -375,7 +375,7 @@ const styles = {
     overflow: "hidden",
   },
   logoContainer: {
-    padding: "30px 0",
+    padding: "31px 0",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
