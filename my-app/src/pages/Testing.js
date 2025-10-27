@@ -297,6 +297,7 @@ function Testing({ user }) {
             {/* Форма закреплена внизу */}
             <form onSubmit={handleSubmitAnswer} style={styles.answerForm}>
               <textarea
+                className="answer-input"
                 placeholder="Пиши свой ответ сюда..."
                 value={userAnswer}
                 onChange={(e) => {
@@ -361,6 +362,7 @@ function Testing({ user }) {
             {/* Форма для LLM закреплена внизу */}
             <form onSubmit={handleLlmQuery} style={styles.llmForm}>
               <textarea
+                className="llm-input"
                 placeholder="Задай вопрос AI модели..."
                 value={llmQuery}
                 onChange={(e) => {
@@ -532,12 +534,12 @@ const styles = {
     height: "54px",
     backgroundColor: "#10181C",
     border: "1px solid #3d4f5d",
-    borderRadius: "100px",
+    borderRadius: "20px",
     color: "white",
     fontSize: "14px",
     outline: "none",
     resize: "none",
-    overflow: "hidden",
+    overflowY: "auto",
     minHeight: "54px",
     maxHeight: "200px",
   },
@@ -638,12 +640,12 @@ const styles = {
     height: "54px",
     backgroundColor: "#10181C",
     border: "1px solid #3d4f5d",
-    borderRadius: "100px",
+    borderRadius: "20px",
     color: "white",
     fontSize: "14px",
     outline: "none",
     resize: "none",
-    overflow: "hidden",
+    overflowY: "auto",
     minHeight: "54px",
     maxHeight: "200px",
   },
