@@ -16,6 +16,8 @@ function Testing({ user }) {
   const navigate = useNavigate();
 
   const chatEndRef = useRef(null);
+  const answerTextareaRef = useRef(null);
+  const llmTextareaRef = useRef(null);
 
   // Состояние данных
   const [questions, setQuestions] = useState([]);
@@ -61,6 +63,14 @@ function Testing({ user }) {
     // Очищаем историю чата при переходе на другой вопрос
     setLlmMessages([]);
   }, [currentQuestionIndex]);
+
+  // Функция для автоматического изменения высоты textarea
+  const handleTextareaResize = (textareaRef) => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "54px"; // Сброс к начальной высоте
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Установка высоты по содержимому
+    }
+  };
 
   // Функция загрузки вопросов
   const loadQuestions = async () => {
@@ -286,12 +296,16 @@ function Testing({ user }) {
 
             {/* Форма закреплена внизу */}
             <form onSubmit={handleSubmitAnswer} style={styles.answerForm}>
-              <input
-                type="text"
+              <textarea
                 placeholder="Пиши свой ответ сюда..."
                 value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
+                onChange={(e) => {
+                  setUserAnswer(e.target.value);
+                  handleTextareaResize(answerTextareaRef);
+                }}
+                ref={answerTextareaRef}
                 style={styles.answerInput}
+                rows={1}
               />
               <button type="submit" style={styles.sendButton}>
                 <img src="/send_icon.png" alt="Send" style={styles.sendIcon} />
@@ -346,13 +360,17 @@ function Testing({ user }) {
 
             {/* Форма для LLM закреплена внизу */}
             <form onSubmit={handleLlmQuery} style={styles.llmForm}>
-              <input
-                type="text"
+              <textarea
                 placeholder="Задай вопрос AI модели..."
                 value={llmQuery}
-                onChange={(e) => setLlmQuery(e.target.value)}
+                onChange={(e) => {
+                  setLlmQuery(e.target.value);
+                  handleTextareaResize(llmTextareaRef);
+                }}
+                ref={llmTextareaRef}
                 disabled={!currentThreadId}
                 style={styles.llmInput}
+                rows={1}
               />
               <button
                 type="submit"
@@ -518,6 +536,10 @@ const styles = {
     color: "white",
     fontSize: "14px",
     outline: "none",
+    resize: "none",
+    overflow: "hidden",
+    minHeight: "54px",
+    maxHeight: "200px",
   },
   sendButton: {
     backgroundColor: "#10181C",
@@ -620,6 +642,10 @@ const styles = {
     color: "white",
     fontSize: "14px",
     outline: "none",
+    resize: "none",
+    overflow: "hidden",
+    minHeight: "54px",
+    maxHeight: "200px",
   },
 };
 
