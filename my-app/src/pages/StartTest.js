@@ -21,7 +21,7 @@ function StartTest({ user }) {
     try {
       // Пока что используем тест с ID = 1 (можно сделать выбор теста позже)
       const testId = 1;
-      const attempt = await startAttempt(testId);
+      const attempt = await startAttempt(testId, code);
 
       // Переходим на страницу тестирования
       navigate(`/testing/${attempt.id}`);

@@ -113,13 +113,13 @@ export async function getTestById(testId) {
  * @param {number} testId - ID теста
  * @returns {Promise} - Данные попытки тестирования
  */
-export async function startAttempt(testId) {
+export async function startAttempt(testId, code) {
   const response = await fetch(
     `${process.env.REACT_APP_API_URL}/api/tests/${testId}/attempt`,
     {
       ...fetchOptions,
       method: "POST",
-      // body: JSON.stringify({ access_code: "TEST-2025-INFINITY" }),
+      body: JSON.stringify({ access_code: code }),
     }
   );
 
