@@ -26,7 +26,7 @@ function Testing({ user }) {
   const [userAnswer, setUserAnswer] = useState("");
   const [submittedAnswers, setSubmittedAnswers] = useState({});
   const [llmQuery, setLlmQuery] = useState("");
-  const [llmMessages, setLlmMessages] = useState([]);
+  const [llmMessagesHistory, setLlmMessagesHistory] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -43,6 +43,7 @@ function Testing({ user }) {
 
   // Получаем threadId для текущего вопроса
   const currentThreadId = threadIds[currentQuestionIndex];
+  const llmMessages = llmMessagesHistory[currentQuestionIndex] || [];
 
   useEffect(() => {
     if (chatEndRef.current) {
@@ -110,12 +111,6 @@ function Testing({ user }) {
       initializeLlmDialogue();
     }
   }, [currentQuestionIndex, questions, currentThreadId]);
-
-  // Очистка истории сообщений при смене вопроса
-  useEffect(() => {
-    // Очищаем историю чата при переходе на другой вопрос
-    setLlmMessages([]);
-  }, [currentQuestionIndex]);
 
   // Функция для автоматического изменения высоты textarea
   const handleTextareaResize = (textareaRef) => {
@@ -222,40 +217,49 @@ function Testing({ user }) {
 
     if (!llmQuery.trim()) return;
 
-    // Проверяем, что диалог создан для текущего вопроса
     if (!currentThreadId) {
       alert("Диалог с AI ещё не создан. Пожалуйста, подождите.");
       return;
     }
 
-    // Добавляем сообщение пользователя в чат
     const userMessage = llmQuery;
-    setLlmMessages((prev) => [...prev, { type: "user", text: userMessage }]);
+    // Обновляем историю для текущего вопроса
+    setLlmMessagesHistory((prev) => ({
+      ...prev,
+      [currentQuestionIndex]: [
+        ...(prev[currentQuestionIndex] || []),
+        { type: "user", text: userMessage },
+      ],
+    }));
     setLlmQuery("");
     setIsLlmLoading(true);
 
     try {
-      // Отправляем сообщение в LLM и получаем ответ
       const questionPosition = currentQuestionIndex + 1;
       const response = await sendAIMessage(
         attemptId,
         questionPosition,
-        currentThreadId, // Используем threadId для текущего вопроса
+        currentThreadId,
         userMessage
       );
 
-      // Добавляем ответ модели в чат
-      setLlmMessages((prev) => [
+      // Добавляем ответ модели
+      setLlmMessagesHistory((prev) => ({
         ...prev,
-        { type: "model", text: response.response },
-      ]);
+        [currentQuestionIndex]: [
+          ...(prev[currentQuestionIndex] || []),
+          { type: "model", text: response.response },
+        ],
+      }));
     } catch (err) {
       console.error("Ошибка отправки сообщения в LLM:", err);
-      // Добавляем сообщение об ошибке в чат
-      setLlmMessages((prev) => [
+      setLlmMessagesHistory((prev) => ({
         ...prev,
-        { type: "model", text: `Ошибка: ${err.message}` },
-      ]);
+        [currentQuestionIndex]: [
+          ...(prev[currentQuestionIndex] || []),
+          { type: "model", text: `Ошибка: ${err.message}` },
+        ],
+      }));
     } finally {
       setIsLlmLoading(false);
     }
