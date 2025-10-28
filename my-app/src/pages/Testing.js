@@ -186,13 +186,13 @@ function Testing({ user }) {
         // Если это последний вопрос, завершаем тестирование и переходим к результатам
         try {
           await submitAttempt(attemptId);
-          alert("Тестирование завершено!");
+          // alert("Тестирование завершено!");
           navigate(`/results/${attemptId}`);
         } catch (err) {
           alert(`Ошибка завершения тестирования: ${err.message}`);
         }
       } else {
-        alert("Ответ сохранён");
+        // alert("Ответ сохранён");
       }
     } catch (err) {
       alert(err.message);
