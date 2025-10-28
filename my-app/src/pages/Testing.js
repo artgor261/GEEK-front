@@ -201,13 +201,11 @@ function Testing({ user }) {
 
   // Завершение тестирования
   const handleFinish = async () => {
-    if (window.confirm("Вы уверены, что хотите завершить тестирование?")) {
-      try {
-        await submitAttempt(attemptId);
-        navigate(`/results/${attemptId}`);
-      } catch (err) {
-        alert(err.message);
-      }
+    try {
+      await submitAttempt(attemptId);
+      navigate(`/results/${attemptId}`);
+    } catch (err) {
+      alert(err.message);
     }
   };
 
