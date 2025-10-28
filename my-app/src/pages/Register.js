@@ -23,7 +23,7 @@ function Register({ setUser }) {
     try {
       const user = await register(email, password, confirmPassword);
       setUser(user);
-      navigate("/login");
+      navigate("/start");
     } catch (err) {
       setError(err.message);
     } finally {

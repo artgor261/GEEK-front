@@ -37,7 +37,7 @@ function App() {
         <Route
           path="/register"
           element={
-            user ? <Navigate to="/login" /> : <Register setUser={setUser} />
+            user ? <Navigate to="/start" /> : <Register setUser={setUser} />
           }
         />
 

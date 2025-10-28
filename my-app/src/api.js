@@ -119,7 +119,7 @@ export async function startAttempt(testId) {
     {
       ...fetchOptions,
       method: "POST",
-      body: JSON.stringify({ access_code: "TEST-2025-INFINITY" }),
+      // body: JSON.stringify({ access_code: "TEST-2025-INFINITY" }),
     }
   );
 
