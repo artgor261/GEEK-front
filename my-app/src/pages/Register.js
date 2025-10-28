@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "../components/Logo";
-import { register } from "../api";
+import { register, login } from "../api";
 
 // Страница регистрации
 function Register({ setUser }) {
@@ -22,6 +22,7 @@ function Register({ setUser }) {
 
     try {
       const user = await register(email, password, confirmPassword);
+      await login(email, password);
       setUser(user);
       navigate("/start");
     } catch (err) {
