@@ -8,6 +8,7 @@ import {
   submitAttempt,
   createAIDialogue,
   sendAIMessage,
+  getTestById,
 } from "../api";
 
 // Страница тестирования
@@ -26,10 +27,13 @@ function Testing({ user }) {
   const [submittedAnswers, setSubmittedAnswers] = useState({});
   const [llmQuery, setLlmQuery] = useState("");
   const [llmMessages, setLlmMessages] = useState([]);
-  // const [llmModel, setLlmModel] = useState("ChatGPT");
-  // const [showModelList, setShowModelList] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // Состояния для таймера
+  const [testId, setTestId] = useState(null);
+  const [timeLimit, setTimeLimit] = useState(null);
+  const [remainingTime, setRemainingTime] = useState(null);
 
   // Состояние для работы с LLM
   // Храним threadId для каждого вопроса отдельно
@@ -50,6 +54,55 @@ function Testing({ user }) {
   useEffect(() => {
     loadQuestions();
   }, [attemptId]);
+
+  // Загрузка данных теста для получения timeLimit
+  useEffect(() => {
+    const loadTestData = async () => {
+      try {
+        const testId = 1;
+        const testData = await getTestById(testId);
+        setTestId(testId);
+
+        // timeLimit приходит в наносекундах, конвертируем в секунды
+        const timeLimitInSeconds = Math.floor(testData.timeLimit / 1000000000);
+        setTimeLimit(timeLimitInSeconds);
+        setRemainingTime(timeLimitInSeconds);
+      } catch (err) {
+        console.error("Ошибка загрузки данных теста:", err);
+      }
+    };
+
+    loadTestData();
+  }, [attemptId]);
+
+  // Таймер обратного отсчёта
+  useEffect(() => {
+    if (remainingTime === null || remainingTime <= 0) return;
+
+    const timer = setInterval(() => {
+      setRemainingTime((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          // Автоматически завершаем тест
+          handleTimeExpired();
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [remainingTime]);
+
+  // Функция для автоматического завершения теста при истечении времени
+  const handleTimeExpired = async () => {
+    try {
+      await submitAttempt(attemptId);
+      navigate(`/results/${attemptId}`);
+    } catch (err) {
+      console.error("Ошибка автоматического завершения теста:", err);
+    }
+  };
 
   // Создание диалога с LLM для текущего вопроса (если ещё не создан)
   useEffect(() => {
@@ -163,21 +216,6 @@ function Testing({ user }) {
     }
   };
 
-  // useEffect(() => {
-  //   const onKeyDown = (e) => {
-  //     if (e.ctrlKey && (e.key === "z" || e.key === "Z")) {
-  //       // не срабатывать при вводе в поля ввода/textarea
-  //       const tag = document.activeElement && document.activeElement.tagName;
-  //       if (tag === "INPUT" || tag === "TEXTAREA") return;
-  //       e.preventDefault();
-  //       handleFinish();
-  //     }
-  //   };
-
-  //   window.addEventListener("keydown", onKeyDown);
-  //   return () => window.removeEventListener("keydown", onKeyDown);
-  // }, [handleFinish]);
-
   // Отправка запроса к LLM (реальная интеграция)
   const handleLlmQuery = async (e) => {
     e.preventDefault();
@@ -262,6 +300,22 @@ function Testing({ user }) {
                 </button>
               ))}
             </div>
+
+            {/* Таймер */}
+            {remainingTime !== null && (
+              <div style={styles.timerContainer}>
+                <div style={styles.timerText}>
+                  {Math.floor(remainingTime / 3600)
+                    .toString()
+                    .padStart(2, "0")}
+                  :
+                  {Math.floor((remainingTime % 3600) / 60)
+                    .toString()
+                    .padStart(2, "0")}
+                  :{(remainingTime % 60).toString().padStart(2, "0")}
+                </div>
+              </div>
+            )}
 
             {/* Кнопка завершения тестирования */}
             <button
@@ -410,13 +464,13 @@ const styles = {
     overflow: "hidden",
   },
   logoContainer: {
-    padding: "5px 0 25px 0", // РЕГУЛИРОВКА ВЫСОТЫ ЛОГОТИПА: первое значение (20px) = отступ сверху, второе (0) = справа, третье (15px) = снизу, четвёртое (0) = слева
+    padding: "0px 0 20px 0", // РЕГУЛИРОВКА ВЫСОТЫ ЛОГОТИПА: первое значение (20px) = отступ сверху, второе (0) = справа, третье (15px) = снизу, четвёртое (0) = слева
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   logoImage: {
-    maxWidth: "140px", // РЕГУЛИРОВКА РАЗМЕРА ЛОГОТИПА: измените это значение для изменения размера логотипа
+    maxWidth: "120px", // РЕГУЛИРОВКА РАЗМЕРА ЛОГОТИПА: измените это значение для изменения размера логотипа
     height: "auto",
   },
   questionsHeader: {
@@ -492,7 +546,7 @@ const styles = {
   },
   questionBubble: {
     alignSelf: "flex-start",
-    maxWidth: "45%",
+    maxWidth: "35%",
     backgroundColor: "white",
     borderRadius: "10px",
     padding: "15px 20px",
@@ -500,7 +554,7 @@ const styles = {
   questionText: {
     margin: 0,
     color: "#111F25",
-    fontSize: "20px",
+    fontSize: "15px",
     lineHeight: "1.5",
   },
   answerBubble: {
@@ -514,7 +568,7 @@ const styles = {
   answerText: {
     margin: 0,
     color: "#D9FFFA",
-    fontSize: "18px",
+    fontSize: "15px",
     lineHeight: "1.5",
     whiteSpace: "pre-wrap",
     wordBreak: "break-word",
@@ -648,6 +702,18 @@ const styles = {
     overflowY: "auto",
     minHeight: "54px",
     maxHeight: "200px",
+  },
+  timerContainer: {
+    padding: "10px 30px",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  timerText: {
+    color: "white",
+    fontSize: "18px",
+    fontWeight: "500",
+    backgroundColor: "transparent",
   },
 };
 
