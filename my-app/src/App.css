@@ -114,8 +114,7 @@ body {
 /* Сообщение об ошибке */
 .error-message {
   background-color: transparent;
-  border: 1px solid white;
-  color: blue;
+  color: white;
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 15px;
