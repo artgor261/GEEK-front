@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
-import { login } from "../api";
+import { login, checkSession } from "../api";
 
 // Страница входа
 function Login({ setUser }) {
@@ -12,6 +12,27 @@ function Login({ setUser }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
+
+  // Проверка существующей сессии при загрузке компонента
+  useEffect(() => {
+    const checkExistingSession = async () => {
+      try {
+        const sessionData = await checkSession();
+        if (sessionData.authenticated && sessionData.user) {
+          setUser(sessionData.user);
+          navigate("/start");
+        }
+      } catch (err) {
+        // Если проверка сессии не удалась, просто показываем форму входа
+        console.error("Session check failed:", err);
+      } finally {
+        setCheckingSession(false);
+      }
+    };
+
+    checkExistingSession();
+  }, [navigate, setUser]);
 
   // Обработка отправки формы
   const handleSubmit = async (e) => {
@@ -29,6 +50,19 @@ function Login({ setUser }) {
       setLoading(false);
     }
   };
+
+  // Показываем загрузку во время проверки сессии
+  if (checkingSession) {
+    return (
+      <div className="page">
+        <div className="centered-container">
+          <div className="form-container">
+            <p>Проверка сессии...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page">
