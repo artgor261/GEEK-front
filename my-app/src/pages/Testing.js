@@ -289,6 +289,7 @@ function Testing({ user }) {
             <div style={styles.questionNumbers}>
               {questions.map((q, index) => (
                 <button
+                  class="question"
                   key={q.id}
                   style={{
                     ...styles.questionNumber,
@@ -364,7 +365,7 @@ function Testing({ user }) {
                 style={styles.answerInput}
                 rows={1}
               />
-              <button type="submit" style={styles.sendButton}>
+              <button class="send" type="submit" style={styles.sendButton}>
                 <img src="/send_2.png" alt="Send" style={styles.sendIcon} />
               </button>
             </form>
@@ -432,6 +433,7 @@ function Testing({ user }) {
               />
               <button
                 type="submit"
+                class="sendllm"
                 disabled={!currentThreadId || !llmQuery.trim()}
                 style={styles.sendButton}
               >
