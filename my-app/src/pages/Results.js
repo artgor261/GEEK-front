@@ -58,7 +58,7 @@ function Results({ user }) {
   }
 
   // Подсчёт максимального балла (если нужно)
-  const maxScore = 100; // Можно получить из теста, если нужно
+  const maxScore = 60; // Можно получить из теста, если нужно
 
   return (
     <div className="page" style={styles.page}>
@@ -92,12 +92,12 @@ function Results({ user }) {
               <div key={answer.id} style={styles.taskItem}>
                 <span style={styles.taskNumber}>Задание №{index + 1}</span>
                 <span
-                  style={{
-                    ...styles.taskStatus,
-                    color: answer.right_or_no ? "#D9FFFA" : "#D9FFFA",
-                  }}
+                // style={{
+                //   ...styles.taskStatus,
+                //   color: answer.right_or_no ? "#D9FFFA" : "#D9FFFA",
+                // }}
                 >
-                  {answer.right_or_no ? "Верно" : "Неверно"}
+                  {answer.score}
                 </span>
               </div>
             ))}
